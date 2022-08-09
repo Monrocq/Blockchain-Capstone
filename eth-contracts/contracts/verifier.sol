@@ -325,8 +325,8 @@ contract Verifier {
         return 0;
     }
 
-    function verifyTx(Proof memory proof, uint256[1] memory input)
-        public
+    function verifyTx(Proof calldata proof, uint256[1] calldata input)
+        external
         view
         returns (bool r)
     {

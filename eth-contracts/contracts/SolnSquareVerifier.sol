@@ -6,14 +6,17 @@ import "./ERC721Mintable.sol";
 
 // TODO define a contract call to the zokrates generated solidity contract <Verifier> or <renamedVerifier>
 contract renamedVerifier is Verifier {
-    function verifyTx(Verifier.Proof calldata proof, uint256[1] calldata input)
-        external
-        returns (bool);
+
 }
 
 // TODO define another contract named SolnSquareVerifier that inherits from your ERC721Mintable class
 contract SolnSquareVerifier is CustomERC721Token {
     renamedVerifier verifier;
+    string constant name = "Real Estate Marketplace";
+    string constant symbol = "REM";
+
+    constructor() public CustomERC721Token(name, symbol) {}
+
     // TODO define a solutions struct that can hold an index & an address
     struct Solution {
         uint256 index;
@@ -34,9 +37,9 @@ contract SolnSquareVerifier is CustomERC721Token {
     );
 
     // TODO Create a function to add the solutions to the array and emit the event
-    function addSolution(address addr) public onlyOwner {
-        solutions.push(Solution(solutions.length, addr));
-        emit SolutionAdded(solutions.length, addr, false);
+    function addSolution(uint256 index) public onlyOwner {
+        solutions.push(Solution(index, msg.sender));
+        emit SolutionAdded(index, msg.sender, false);
     }
 
     // TODO Create a function to mint new NFT only after the solution has been verified
@@ -60,6 +63,16 @@ contract SolnSquareVerifier is CustomERC721Token {
             submitted[checker.input[0]].addr == address(0),
             "This solution has already been used"
         );
-        super.mint(to, totalSupply(), tokenURI);
+        for (uint256 i = 0; i < solutions.length; i++) {
+            if (
+                solutions[i].index == checker.input[0] && checker.input[0] != 0
+            ) {
+                Solution storage solution = solutions[i];
+                submitted[checker.input[0]] = solutions[i];
+                super.mint(to, totalSupply(), tokenURI);
+                return;
+            }
+        }
+        revert("This solution doesn't exist");
     }
 }
