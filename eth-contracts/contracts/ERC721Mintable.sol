@@ -11,7 +11,7 @@ contract Ownable {
     //  1) create a private '_owner' variable of type address with a public getter function
     address private _owner;
 
-    function owner() public returns (address) {
+    function owner() public view returns (address) {
         return _owner;
     }
 
@@ -170,7 +170,7 @@ contract ERC721 is Pausable, ERC165 {
     function balanceOf(address owner) public view returns (uint256) {
         // TODO return the token balance of given address
         // TIP: remember the functions to use for Counters. you can refresh yourself with the link above
-        return _ownedTokensCount[owner];
+        return _ownedTokensCount[owner].current();
     }
 
     function ownerOf(uint256 tokenId) public view returns (address) {
