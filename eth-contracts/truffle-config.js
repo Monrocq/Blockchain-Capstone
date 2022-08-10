@@ -3,6 +3,7 @@ const fs = require('fs');
 const mnemonic = fs.readFileSync('.secret').toString().trim();
 require('dotenv').config();
 const infuraURL = process.env.INFURA_URL
+const etherscanAPI = process.env.ETHERSCAN
 
 
 /**
@@ -24,12 +25,6 @@ const infuraURL = process.env.INFURA_URL
  * phrase from a file you've .gitignored so it doesn't accidentally become public.
  *
  */
-
-// const HDWalletProvider = require('truffle-hdwallet-provider');
-// const infuraKey = "fj4jll3k.....";
-//
-// const fs = require('fs');
-// const mnemonic = fs.readFileSync(".secret").toString().trim();
 
 module.exports = {
   /**
@@ -108,5 +103,9 @@ module.exports = {
       //  evmVersion: "byzantium"
       // }
     }
+  },
+  plugins: ['truffle-plugin-verify'],
+  api_keys: {
+    etherscan: etherscanAPI
   }
 }
