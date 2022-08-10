@@ -40,9 +40,13 @@ The capstone was built upon the knowledge you have gained in the course in order
 
 > Total cost: 0.0082075200820752 ETH
 
-## URL of the storefront link
+## URL of the storefront link and Contracts address
 
 Opensea Marketplace : https://testnets.opensea.io/collection/real-estate-marketplace-du2qnzhkav
+
+**Verifier** : 0xABdF8a4c52b37c09Cbb688428FCf9E963C589555
+
+**SquareVerifier** : 0xF8561e4e1F1479CDE7b7B8f0e0eA75bb78732e07
 
 ## Assets
 
