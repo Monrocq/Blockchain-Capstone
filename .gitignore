@@ -1,1 +1,4 @@
 node_modules/
+eth-contracts/build/
+eth-contracts/.secret
+eth-contracts/.env
